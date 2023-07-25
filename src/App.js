@@ -1,10 +1,14 @@
+
+import DataContextProvider from "./context/DataContextProvider";
 import MainPage from "./screens";
 
+
 function App() {
+ 
   return (
-    <div>
+    <DataContextProvider>
       <MainPage />
-    </div>
+    </DataContextProvider>
   );
 }
 

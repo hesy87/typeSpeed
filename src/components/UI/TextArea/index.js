@@ -1,22 +1,16 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import { Input } from "antd";
+import { dataContext } from "../../../context/data-context";
 const { TextArea } = Input;
 const App = (props) => {
   const [inputWordCont, setinputWordCont] = useState();
-  const [inputSent, setinputSent] = useState();
+  const ctx = useContext(dataContext);
 
   const inputHandler = (e) => {
     const arr = e.target.value.split(" ");
     setinputWordCont(arr.filter((word) => word !== "").length);
-    setinputSent(arr)
   };
-
-
-
-  const correctSent = () => {
-    if(inputSent === props.text) {console.log('correct');} else console.log('wrong');
-  };
-
+  ctx.setinputWordCount(inputWordCont);
   return (
     <>
       <TextArea
