@@ -1,5 +1,7 @@
 import getBook from "../Data/index";
 import Button from "../components/UI/Button";
+import { Card,Space  } from 'antd';
+import TextArea from '../components/UI/TextArea'
 
 const MainPage = (props) => {
   function getRandomNumber(min, max) {
@@ -11,10 +13,22 @@ const MainPage = (props) => {
   const data = getBook(randomNumber);
 
   return (
-    <div>
-      <h3>{data.discription}</h3>
-      <Button />
-    </div>
+<Space direction="vertical" size={24}>
+<Card
+  size="default"
+  title="Typing Speed Game"
+  style={{
+    width: 600,
+  }}
+>
+<h3>{data.discription}</h3>
+<TextArea text={data.discription}/>
+<br/>
+<br/>
+  <Button />
+</Card>
+</Space>
+
   );
 };
 
