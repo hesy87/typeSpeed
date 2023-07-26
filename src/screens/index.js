@@ -3,14 +3,11 @@ import Button from "../components/UI/Button";
 import { Card, Space } from "antd";
 import TextArea from "../components/UI/TextArea";
 import DataTable from "../components/UI/Description";
-import { useContext, useEffect, useState } from "react";
-import { dataContext } from "../context/data-context";
+import { useEffect, useState } from "react";
 
 const MainPage = (props) => {
   //// get a random text from data
   const [data, setData] = useState({});
-  // const [table,setTable] = useState()
-  const ctx = useContext(dataContext);
   useEffect(() => {
     function getRandomNumber() {
       return Math.floor(Math.random() * 6);
@@ -19,14 +16,9 @@ const MainPage = (props) => {
     const data = getBook(randomNumber);
     setData(data);
   }, []);
+  ///////////////
 
-  // useEffect(()=>{
-  //   setTable(ctx.wordPerTime)
-  // },[ctx.wordPerTime])
-
-  ////////////////
-
-  ////set start/stop button to show
+  ////set start/stop/Reset button to show
   const [showButton, setShowButton] = useState(true);
   const [showResetButton, setShowResetButton] = useState(false);
   const [showTable, setShowTable] = useState(false);
@@ -38,6 +30,8 @@ const MainPage = (props) => {
   const ResetHandler = () => {
     setShowResetButton(!showResetButton);
   };
+  ////////////////
+
   return (
     <Space direction="vertical" size={24}>
       <Card
