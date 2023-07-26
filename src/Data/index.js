@@ -2,11 +2,11 @@ const data = [
   {
     id: 0,
     discription:
-      "Search without limits and message anyone even if you are not connected",
+      "Search without limits and message anyone even if you are not connected", 
   },
   {
     id: 1,
-    discription: "Even the smallest person can change the course of the future",
+    discription: "Even the smallest person can change the course of the future world", 
   },
   {
     id: 2,

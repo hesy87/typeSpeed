@@ -3,26 +3,28 @@ import { dataContext } from "./data-context";
 
 const DataContextProvider = (props) => {
   const [inputWordCount, setinputWordCount] = useState();
-  const [showResult, setshowResult] = useState();
   const [showTime, setshowTime] = useState();
-  const [startTime, setstartTime] = useState();
+  const [startTime, setStartTime] = useState();
   const [finishTime, setFinishTime] = useState();
+  const [diffTime, setDiffTime] = useState();
+  const [wordPerTime, setWordPerTime] = useState();
 
-  console.log("start", startTime);
-  console.log("finish", finishTime);
+
   return (
     <dataContext.Provider
       value={{
         inputWordCount,
         setinputWordCount,
-        showResult,
-        setshowResult,
         showTime,
         setshowTime,
         startTime,
-        setstartTime,
+        setStartTime,
         finishTime,
         setFinishTime,
+        diffTime,
+        setDiffTime,
+        wordPerTime,
+        setWordPerTime,
       }}
     >
       {props.children}

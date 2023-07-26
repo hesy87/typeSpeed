@@ -1,30 +1,60 @@
 import React, { useContext, useState } from "react";
-import { PoweroffOutlined, FieldTimeOutlined } from "@ant-design/icons";
+import {
+  PoweroffOutlined,
+  FieldTimeOutlined,
+  RedoOutlined,
+} from "@ant-design/icons";
 import { Button } from "antd";
 import { dataContext } from "../../../context/data-context";
+import moment from "moment/moment";
 
-const App = () => {
+const App = ({ modelName, setStatus, setStatusReset }) => {
   const ctx = useContext(dataContext);
-  const [ButtonLogo, setButtonLogo] = useState(true);
-  const [ButtonColor, setButtonColor] = useState(true);
-  const [ButtonText, setButtonText] = useState(true);
 
-  const enterLoading = () => {
-    setButtonLogo(!ButtonLogo);
-    setButtonColor(!ButtonColor);
-    setButtonText(!ButtonColor);
-    ctx.setshowResult(ButtonText);
-    ctx.setFinishTime(Date.now());
+  const enterLoading = (name) => {
+    //// calcute Diffrence time
+    const now = moment();
+    ctx.setFinishTime(now);
+    ctx.setDiffTime((now.diff(ctx.startTime) / 1000).toFixed(2));
+    if (name === "start") setStatus();
+    else if (name === "finish") {
+      setStatus();
+      setStatusReset();
+    } else if (name === "Restart") { setStatusReset();}
   };
   return (
     <Button
-      type="primary"
-      icon={ButtonLogo ? <FieldTimeOutlined /> : <PoweroffOutlined />}
-      onClick={() => enterLoading()}
-      style={ButtonColor ? { background: "blue" } : { background: "red" }}
+      type={
+        modelName === "start"
+          ? "primary"
+          : modelName === "finish"
+          ? "primary"
+          : modelName === "Restart"
+          ? "dashed"
+          : "null"
+      }
+      icon={
+        modelName === "start" ? (
+          <FieldTimeOutlined />
+        ) : modelName === "finish" ? (
+          <PoweroffOutlined />
+        ) : modelName === "Restart" ? (
+          <RedoOutlined />
+        ) : (
+          "null"
+        )
+      }
+      onClick={() => enterLoading(modelName)}
+      danger={modelName === "start" ? false : true}
       size="large"
     >
-      {ButtonLogo ? "TYPE TO START !" : "STOP !"}
+      {modelName === "start"
+        ? "START !"
+        : modelName === "finish"
+        ? "STOP !"
+        : modelName === "Restart"
+        ? "RESTART"
+        : "null"}
     </Button>
   );
 };
