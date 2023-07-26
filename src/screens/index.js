@@ -2,12 +2,9 @@ import getBook from "../Data/index";
 import Button from "../components/UI/Button";
 import { Card, Space } from "antd";
 import TextArea from "../components/UI/TextArea";
-import DataTable from "../components/UI/Description"
-import { useContext } from 'react';
-import { dataContext } from './../context/data-context';
+import DataTable from "../components/UI/Description";
 
 const MainPage = (props) => {
-  const ctx = useContext(dataContext)
   function getRandomNumber(min, max) {
     return Math.floor(Math.random() * 6);
   }
@@ -30,7 +27,7 @@ const MainPage = (props) => {
         <br />
         <br />
         <Button />
-        {ctx.showResult ? null : <DataTable/>}
+        <DataTable />
       </Card>
     </Space>
   );

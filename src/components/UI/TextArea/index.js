@@ -10,6 +10,12 @@ const App = (props) => {
     const arr = e.target.value.split(" ");
     setinputWordCont(arr.filter((word) => word !== "").length);
   };
+
+  const TimeHandler = () => {
+    const timeElapsed = Date.now();
+    const today = new Date(timeElapsed);
+    ctx.setstartTime(today);
+  };
   ctx.setinputWordCount(inputWordCont);
   return (
     <>
@@ -17,6 +23,7 @@ const App = (props) => {
         rows={4}
         placeholder="Write the sentence above"
         onChange={inputHandler}
+        onClick={TimeHandler}
       />
     </>
   );
