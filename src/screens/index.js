@@ -1,11 +1,20 @@
-import getBook from "../Data/index";
+import { getBook } from "../Data/index";
 import Button from "../components/UI/Button";
-import { Card, Space } from "antd";
+import { Card, Col, Row, Space } from "antd";
 import TextArea from "../components/UI/TextArea";
 import DataTable from "../components/UI/Description";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import { dataContext } from "../context/data-context";
+import Time from "../components/Timer";
+import Switch from "../components/UI/Switch";
+import { getHardBook } from "../Data/index";
 
 const MainPage = (props) => {
+  ////set start/stop/Reset button to show
+  const [showButton, setShowButton] = useState(true);
+  const [showResetButton, setShowResetButton] = useState(false);
+  const [showTable, setShowTable] = useState(false);
+  const ctx = useContext(dataContext);
   //// get a random text from data
   const [data, setData] = useState({});
   useEffect(() => {
@@ -13,15 +22,11 @@ const MainPage = (props) => {
       return Math.floor(Math.random() * 6);
     }
     const randomNumber = getRandomNumber();
-    const data = getBook(randomNumber);
-    setData(data);
-  }, []);
+    ctx.switchStatus === false
+      ? setData(getBook(randomNumber))
+      : setData(getHardBook(randomNumber));
+  }, [ctx.switchStatus, ctx.switchSectence]);
   ///////////////
-
-  ////set start/stop/Reset button to show
-  const [showButton, setShowButton] = useState(true);
-  const [showResetButton, setShowResetButton] = useState(false);
-  const [showTable, setShowTable] = useState(false);
 
   const statushandler = () => {
     setShowButton(!showButton);
@@ -40,30 +45,44 @@ const MainPage = (props) => {
         style={{
           width: 600,
         }}
+        extra={<Switch />}
       >
         <h3>{data.discription}</h3>
         <TextArea text={data.discription} />
         <br />
         <br />
-        {showButton === true && showResetButton === false ? (
-          <Button
-            modelName={"start"}
-            setStatus={statushandler}
-            setStatusReset={ResetHandler}
-          />
-        ) : showButton === false && showResetButton === false ? (
-          <Button
-            modelName={"finish"}
-            setStatus={statushandler}
-            setStatusReset={ResetHandler}
-          />
-        ) : showButton === true && showResetButton === true ? (
-          <Button
-            modelName={"Restart"}
-            setStatus={statushandler}
-            setStatusReset={ResetHandler}
-          />
-        ) : null}
+        <Row
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <Col span={8}>
+            {showButton === true && showResetButton === false ? (
+              <Button
+                modelName={"start"}
+                setStatus={statushandler}
+                setStatusReset={ResetHandler}
+              />
+            ) : showButton === false && showResetButton === false ? (
+              <Button
+                modelName={"finish"}
+                setStatus={statushandler}
+                setStatusReset={ResetHandler}
+              />
+            ) : showButton === true && showResetButton === true ? (
+              <Button
+                modelName={"Restart"}
+                setStatus={statushandler}
+                setStatusReset={ResetHandler}
+              />
+            ) : null}
+          </Col>
+          <Col span={4} offset={12}>
+            <Time />
+          </Col>
+        </Row>
 
         {showButton === true && showResetButton === true ? <DataTable /> : null}
       </Card>

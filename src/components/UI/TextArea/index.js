@@ -4,19 +4,21 @@ import { dataContext } from "../../../context/data-context";
 import moment from "moment";
 const { TextArea } = Input;
 const App = (props) => {
-  const [inputWordCont, setinputWordCont] = useState();
   const ctx = useContext(dataContext);
 
-  const inputHandler = (e) => {   ///counting word in a sentence
+  const inputHandler = (e) => {
+    ///counting word in a sentence
+    ctx.setInputText(e.target.value);
     const arr = e.target.value.split(" ");
-    setinputWordCont(arr.filter((word) => word !== "").length);
+    ctx.setinputWordCount(arr.filter((word) => word !== "").length);
   };
 
-  const TimeHandler = () => {   /// find start time 
-    const now = moment()
+  const TimeHandler = () => {
+    /// find start time
+    const now = moment();
     ctx.setStartTime(now);
   };
-  ctx.setinputWordCount(inputWordCont);
+
   return (
     <>
       <TextArea
@@ -24,6 +26,8 @@ const App = (props) => {
         placeholder="Write the sentence above"
         onChange={inputHandler}
         onClick={TimeHandler}
+        disabled={ctx.enableTextArea}
+        value={ctx.inputText}
       />
     </>
   );

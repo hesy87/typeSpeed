@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import {
   PoweroffOutlined,
   FieldTimeOutlined,
@@ -9,18 +9,40 @@ import { dataContext } from "../../../context/data-context";
 import moment from "moment/moment";
 
 const App = ({ modelName, setStatus, setStatusReset }) => {
-  const ctx = useContext(dataContext);
+  const {
+    setFinishTime,
+    startTime,
+    setDiffTime,
+    setEnableTextArea,
+    setInputText,
+    enableTextArea,
+    setStartTimer,
+    startTimer,
+    setSwitchSectence,
+    switchSectence,
+    setTimerStoper,
+    timerStoper,
+  } = useContext(dataContext);
 
   const enterLoading = (name) => {
     //// calcute Diffrence time
     const now = moment();
-    ctx.setFinishTime(now);
-    ctx.setDiffTime((now.diff(ctx.startTime) / 1000).toFixed(2));
-    if (name === "start") setStatus();
-    else if (name === "finish") {
+    setFinishTime(now);
+    setDiffTime((now.diff(startTime) / 1000).toFixed(2));
+    if (name === "start") {
+      setStatus();
+      setEnableTextArea(!enableTextArea);
+      setStartTimer(!startTimer);
+    } else if (name === "finish") {
       setStatus();
       setStatusReset();
-    } else if (name === "Restart") { setStatusReset();}
+      setTimerStoper(!timerStoper);
+      setEnableTextArea(!enableTextArea);
+    } else if (name === "Restart") {
+      setStatusReset();
+      setInputText("");
+      setSwitchSectence(!switchSectence);
+    }
   };
   return (
     <Button
