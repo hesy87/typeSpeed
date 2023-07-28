@@ -64,18 +64,21 @@ const MainPage = (props) => {
                 modelName={"start"}
                 setStatus={statushandler}
                 setStatusReset={ResetHandler}
+                text={data.discription}
               />
             ) : showButton === false && showResetButton === false ? (
               <Button
                 modelName={"finish"}
                 setStatus={statushandler}
                 setStatusReset={ResetHandler}
+                text={data.discription}
               />
             ) : showButton === true && showResetButton === true ? (
               <Button
                 modelName={"Restart"}
                 setStatus={statushandler}
                 setStatusReset={ResetHandler}
+                text={data.discription}
               />
             ) : null}
           </Col>

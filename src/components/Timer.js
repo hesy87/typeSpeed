@@ -5,7 +5,6 @@ import { dataContext } from "../context/data-context";
 const App = () => {
   const ctx = useContext(dataContext);
   const Ref = useRef(null);
-  const [remain, setRemain] = useState();
 
   const getTimeRemaining = (e) => {
     const total = Date.parse(e) - Date.parse(new Date());
