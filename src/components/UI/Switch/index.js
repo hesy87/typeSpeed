@@ -13,6 +13,7 @@ const App = () => {
       ctx.setSwitchStatus(false);
     }
   };
+
   return (
     <>
       <span style={{ marginRight: "1rem" }}>Easy</span>

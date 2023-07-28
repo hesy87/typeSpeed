@@ -15,6 +15,7 @@ const DataContextProvider = (props) => {
   const [switchStatus, setSwitchStatus] = useState(false);
   const [switchSectence, setSwitchSectence] = useState(false);
   const [timerStoper, setTimerStoper] = useState(true);
+  const [timerReset, setTimerReset] = useState(true);
 
   return (
     <dataContext.Provider
@@ -45,6 +46,8 @@ const DataContextProvider = (props) => {
         setSwitchSectence,
         setTimerStoper,
         timerStoper,
+        timerReset,
+        setTimerReset,
       }}
     >
       {props.children}

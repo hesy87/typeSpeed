@@ -22,6 +22,8 @@ const App = ({ modelName, setStatus, setStatusReset }) => {
     switchSectence,
     setTimerStoper,
     timerStoper,
+    timerReset,
+    setTimerReset,
   } = useContext(dataContext);
 
   const enterLoading = (name) => {
@@ -42,6 +44,7 @@ const App = ({ modelName, setStatus, setStatusReset }) => {
       setStatusReset();
       setInputText("");
       setSwitchSectence(!switchSectence);
+      setTimerReset(!timerReset);
     }
   };
   return (

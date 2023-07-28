@@ -10,11 +10,6 @@ const App = () => {
   const getTimeRemaining = (e) => {
     const total = Date.parse(e) - Date.parse(new Date());
     const seconds = Math.floor((total / 1000) % 60);
-    if (ctx.timerStoper === true) {
-      console.log(remain);
-    } else {
-      setRemain(seconds);
-    }
     return {
       total,
       seconds,
@@ -49,9 +44,20 @@ const App = () => {
     }
   }, [ctx.startTimer]);
 
+  if (ctx.timerStoper === false) {
+    clearInterval(Ref.current);
+  }
+
+  if (ctx.timerReset === false) {
+    clearInterval(Ref.current);
+
+    if (ctx.switchStatus === false) {
+      ctx.setCountDownTimer(30);
+    } else ctx.setCountDownTimer(20);
+  }
+
   return (
     <div>
-      {/* <h2>{ctx.countDownTimer}</h2> */}
       <Space wrap>
         <Progress
           type="circle"
